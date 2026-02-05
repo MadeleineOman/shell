@@ -31,26 +31,32 @@ unzip -q rawdata.zip
 mkdir data
 
 # 2. Move the ./rawdata directory to ./data/raw
-mv ./rawdata ./data/raw/
+mkdir ./data/raw
+mv ./rawdata ./data/raw
 
 # 3. List the contents of the ./data/raw directory
 ls ./data/raw 
 
 # 4. In ./data/processed, create the following directories: server_logs, user_logs, and event_logs
-touch ./data/processed/server_logs
-touch ./data/processed/user_logs
-touch ./data/processed/event_logs
+mkdir data/processed
+mkdir ./data/processed/server_logs
+mkdir ./data/processed/user_logs
+mkdir ./data/processed/event_logs
 
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
-
+cp data/raw/rawdata/server_log_* data/processed/server_logs/
 
 # 6. Repeat the above step for user logs and event logs
+cp data/raw/rawdata/user_* data/processed/user_logs/
+cp data/raw/rawdata/event_log_* data/processed/event_logs/
 
 
 # 7. For user privacy, remove all files containing IP addresses (files with "ipaddr" in the filename) from ./data/raw and ./data/processed/user_logs
+rm data/raw/rawdata/*ipaddr*
+rm data/processed/user_logs/*ipaddr*
 
 # 8. Create a file named ./data/inventory.txt that lists all the files in the subfolders of ./data/processed
-
+ls -R  data/processed/ > /data/inventory.txt
 
 ###########################################
 
